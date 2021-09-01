@@ -1,0 +1,72 @@
+{
+    "name": "arttiger/laravel-cpa",
+    "description": "Laravel CPA (Cost Per Action) network integration package",
+    "keywords": [
+        "Laravel",
+        "CPA",
+        "cost per action",
+        "sales doubler",
+        "storm digital",
+        "admitad",
+        "leads su",
+        "do affiliate",
+        "credy",
+        "papa karlo",
+        "fin line",
+        "lead gid",
+        "loangate",
+        "Appscorp",
+        "PAP"
+    ],
+    "homepage": "https://github.com/arttiger/laravel-cpa",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Volodymyr Farylevych",
+            "email": "vfarylevych@gmail.com",
+            "homepage": "https://farylevych.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "vfarylevych@gmail.com",
+        "irc": "irc://irc.freenode.org/composer"
+    },
+    "require": {
+        "illuminate/support": "^5.6|^6.0|^7.0|^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "mockery/mockery": "^1.4.2",
+        "orchestra/testbench": "^3.0|^4.0|^5.0|^6.0",
+        "sempro/phpunit-pretty-print": "^1.0",
+        "styleci/cli": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Arttiger\\Cpa\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Arttiger\\Cpa\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Arttiger\\Cpa\\CpaServiceProvider"
+            ],
+            "aliases": {
+                "Cpa": "Arttiger\\Cpa\\Facades\\Cpa"
+            }
+        }
+    },
+    "minimum-stability": "dev"
+}

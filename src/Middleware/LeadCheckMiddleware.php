@@ -1,0 +1,50 @@
+<?php
+
+namespace Arttiger\Cpa\Middleware;
+
+use Arttiger\Cpa\Lead\LeadService;
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+
+class LeadCheckMiddleware
+{
+    /**
+     * @var LeadService
+     */
+    private $leadService;
+
+    /**
+     * LeadCheckMiddleware constructor.
+     * @param  LeadService  $leadService
+     */
+    public function __construct(LeadService $leadService)
+    {
+        $this->leadService = $leadService;
+    }
+
+    /**
+     * Parse incoming request for cpa sources
+     * and store cpa get params to db if user is authenticated
+     * or store this data to cookie if anonymous user.
+     *
+     * @param  Request  $request
+     * @param  Closure  $next
+     * @return mixed
+     */
+    public function handle($request, Closure $next)
+    {
+        if ($request->has('utm_source')) {
+            $leadGuard = Config::get('cpa.lead_guard');
+            $requestUrl = $request->fullUrl();
+            if (Auth::guard($leadGuard)->check()) {
+                $this->leadService->create(Auth::guard($leadGuard)->user(), $requestUrl);
+            } else {
+                $this->leadService->storeToCookie($requestUrl);
+            }
+        }
+
+        return $next($request);
+    }
+}
