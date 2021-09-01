@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.styleci.io/repos/401979339"><img src="https://github.styleci.io/repos/401979339/shield?style=flat" alt="StyleCI Status"></a>
+    <a href="https://github.styleci.io/repos/402023827"><img src="https://github.styleci.io/repos/402023827/shield?style=flat" alt="StyleCI Status"></a>
     <a href="https://packagist.org/packages/arttiger/laravel-cpa"><img src="https://img.shields.io/packagist/dt/arttiger/laravel-cpa?style=flat" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/arttiger/laravel-cpa"><img src="https://img.shields.io/packagist/v/arttiger/laravel-cpa?style=flat" alt="Latest Stable Version"></a>
     <a href="https://packagist.org/packages/arttiger/laravel-cpa"><img src="https://img.shields.io/packagist/l/arttiger/laravel-cpa?style=flat" alt="License"></a>
