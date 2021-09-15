@@ -51,11 +51,11 @@ class LeadService
         /** @var Lead $lead */
         $lead = Lead::query()->doesntHave('conversions')->updateOrCreate(
             [
-                'source'  => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
+                'source'  => $leadInfo->getSource(),
                 'user_id' => $modelId,
             ],
             [
-                'source'         => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
+                'source'         => $leadInfo->getSource(),
                 'config'         => $leadInfo->getConfig(),
                 'user_id'        => $modelId,
                 'last_cookie_at' => now(),
@@ -114,7 +114,7 @@ class LeadService
             && ! empty($cpaCookie = CpaCookie::query()->find($cookieId))
         ) {
             $modelId = $model instanceof Model ? $model->getKey() : $model;
-            $leadInfo = unserialize($cpaCookie['payload'], ['allowed_classes' => true]);
+            $leadInfo = unserialize(str_replace('Artjoker', 'Arttiger', $cpaCookie['payload']), ['allowed_classes' => true]);
             $user = $leadModel::query()->find($modelId);
             if (empty($leadInfo) || empty($user)) {
                 return null;
@@ -123,11 +123,11 @@ class LeadService
             /** @var Lead $lead */
             $lead = Lead::query()->doesntHave('conversions')->updateOrCreate(
                 [
-                    'source'  => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
+                    'source'  => $leadInfo->getSource(),
                     'user_id' => $user->getKey(),
                 ],
                 [
-                    'source'         => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
+                    'source'         => $leadInfo->getSource(),
                     'config'         => $leadInfo->getConfig(),
                     'user_id'        => $user->getKey(),
                     'last_cookie_at' => $cpaCookie->updated_at,
