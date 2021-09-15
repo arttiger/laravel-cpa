@@ -26,6 +26,11 @@ Install the package via composer:
 $ composer require arttiger/laravel-cpa
 ```
 
+Next, you need to run migrations:
+```bash
+$ php artisan migrate
+```
+
 For Laravel 5.4 and below it necessary to register the service provider
 
 ### Configuration
@@ -59,8 +64,7 @@ This package can be configured by environment variables out-of-box:
 - **CLICK2MONEY_PATH** - path for Click2Money API (example: cpaCallback)
 - **NOLIMIT_PATH** - path for Nolimit API (example: postback)
 
-If one of key for some CPA network not set 
-postback requests for this network will not be done. 
+If one of key for some CPA network not set postback requests for this network will not be done. 
 
 ### Register Middleware
 
@@ -134,4 +138,4 @@ If you discover any security related issues, please email author email instead o
 
 ## License
 
-Please see the [license file](LICENSE.md) for more information.
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

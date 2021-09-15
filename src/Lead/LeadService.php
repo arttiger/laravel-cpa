@@ -51,11 +51,11 @@ class LeadService
         /** @var Lead $lead */
         $lead = Lead::query()->doesntHave('conversions')->updateOrCreate(
             [
-                'source'  => $leadInfo->getSource(),
+                'source'  => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
                 'user_id' => $modelId,
             ],
             [
-                'source'         => $leadInfo->getSource(),
+                'source'         => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
                 'config'         => $leadInfo->getConfig(),
                 'user_id'        => $modelId,
                 'last_cookie_at' => now(),
@@ -123,11 +123,11 @@ class LeadService
             /** @var Lead $lead */
             $lead = Lead::query()->doesntHave('conversions')->updateOrCreate(
                 [
-                    'source'  => $leadInfo->getSource(),
+                    'source'  => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
                     'user_id' => $user->getKey(),
                 ],
                 [
-                    'source'         => $leadInfo->getSource(),
+                    'source'         => str_replace('Artjoker', 'Arttiger', $leadInfo->getSource()),
                     'config'         => $leadInfo->getConfig(),
                     'user_id'        => $user->getKey(),
                     'last_cookie_at' => $cpaCookie->updated_at,
