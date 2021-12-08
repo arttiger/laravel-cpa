@@ -6,14 +6,17 @@ class LeadModel
 {
     /**
      * Click identifier.
+     *
      * @var string
      */
-    public $clickId;
+    public string $clickId;
+
     /**
      * Web master identifier.
+     *
      * @var string
      */
-    public $aid;
+    public string $aid;
 
     public function rules(): array
     {

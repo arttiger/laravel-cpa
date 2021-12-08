@@ -6,9 +6,10 @@ class LeadModel
 {
     /**
      * Click identifier.
+     *
      * @var string
      */
-    public $transactionId;
+    public string $transactionId;
 
     public function rules(): array
     {

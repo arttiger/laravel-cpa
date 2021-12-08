@@ -8,7 +8,7 @@ class EnvironmentConfig
 {
     use EnvironmentConfigTrait;
 
-    public $keyPrefix = 'STORM_DIGITAL_';
+    public string $keyPrefix = 'STORM_DIGITAL_';
 
     public function getSecure(?string $product = null): string
     {

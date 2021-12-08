@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2037d4bf5515abfd13726b0c3df2adb7",
+    "content-hash": "2b91a6affc8a1f968a22c9da433ae615",
     "packages": [
         {
             "name": "brick/math",
@@ -6927,16 +6927,16 @@
         },
         {
             "name": "styleci/cli",
-            "version": "1.1.x-dev",
+            "version": "1.2.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/StyleCI/CLI.git",
-                "reference": "616f0cd79746f9f3ba7f6d9f479f4aba4b6f5a4c"
+                "reference": "5fd905953d368f8a9f4d525d57885ba4d309c18c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/StyleCI/CLI/zipball/616f0cd79746f9f3ba7f6d9f479f4aba4b6f5a4c",
-                "reference": "616f0cd79746f9f3ba7f6d9f479f4aba4b6f5a4c",
+                "url": "https://api.github.com/repos/StyleCI/CLI/zipball/5fd905953d368f8a9f4d525d57885ba4d309c18c",
+                "reference": "5fd905953d368f8a9f4d525d57885ba4d309c18c",
                 "shasum": ""
             },
             "require": {
@@ -6967,9 +6967,9 @@
             ],
             "description": "The CLI tool for StyleCI",
             "support": {
-                "source": "https://github.com/StyleCI/CLI/tree/v1.1.2"
+                "source": "https://github.com/StyleCI/CLI/tree/v1.2.0"
             },
-            "time": "2021-07-13T13:15:13+00:00"
+            "time": "2021-09-06T22:43:50+00:00"
         },
         {
             "name": "symfony/stopwatch",
