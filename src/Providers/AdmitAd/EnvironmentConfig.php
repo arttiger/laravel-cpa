@@ -8,7 +8,7 @@ class EnvironmentConfig
 {
     use EnvironmentConfigTrait;
 
-    public $keyPrefix = 'ADMITAD_';
+    public string $keyPrefix = 'ADMITAD_';
 
     public function getPostbackKey(?string $product = null): string
     {

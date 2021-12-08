@@ -69,7 +69,16 @@ namespace Arttiger\Cpa\Conversion;
 
             /** @var Postback $result */
             $params = $this->getEventParams($event, $source);
-            $params['custom_params'] = $custom_params;
+
+            if (!empty($custom_params)) {
+                if (!empty($custom_params['custom_config'])) {
+                    $params = array_replace($params, $custom_params['custom_config']);
+                }
+                if (!empty($custom_params['custom_params'])) {
+                    $params['custom_params'] = $custom_params['custom_params'];
+                }
+            }
+
             $result = $sender->send($conversion, $params);
             $conversion->request = [
                 'method' => $result->getRequest()->getMethod(),

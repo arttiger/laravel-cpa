@@ -12,16 +12,19 @@ class SendService implements SendServiceInterface
 {
     use SendServiceTrait;
 
-    const PAYMENT_TYPE_SALE = 'sale';
-    const PAYMENT_TYPE_LEAD = 'lead';
+    public const PATH_POSTBACK = 'r';
+
+    public const PAYMENT_TYPE_SALE = 'sale';
+    public const PAYMENT_TYPE_LEAD = 'lead';
 
     /**
      * @var EnvironmentConfig
      */
-    protected $config;
+    protected EnvironmentConfig $config;
 
     /**
      * SendService constructor.
+     *
      * @param EnvironmentConfig $config
      */
     public function __construct(EnvironmentConfig $config)
@@ -30,16 +33,23 @@ class SendService implements SendServiceInterface
         $this->source = LeadSource::ADMITAD;
     }
 
+    /**
+     * Prepare and send postback request.
+     *
+     * @param Conversion $conversion
+     * @param array $params
+     * @return Request
+     */
     protected function getRequest(Conversion $conversion, array $params): Request
     {
-        $uid = $conversion->getConfig()['uid'] ?? null;
+        $path = $params['path'] ?? self::PATH_POSTBACK;
 
         $queryParams = http_build_query([
             'order_id'      => $conversion->getId(),
-            'campaign_code' => $this->config->getCampaignCode($conversion->getProduct()),
-            'uid'           => $uid,
-            'postback'      => 1,
-            'postback_key'  => $this->config->getPostbackKey($conversion->getProduct()),
+            'uid'           => $conversion->getConfig()['uid'] ?? null,
+            'postback'      => $params['postback'] ?? 1,
+            'campaign_code' => $params['campaign_code'] ?? $this->config->getCampaignCode($conversion->getProduct()),
+            'postback_key'  => $params['postback_key'] ?? $this->config->getPostbackKey($conversion->getProduct()),
             'action_code'   => $params['action_code'] ?? $this->config->getActionCode($conversion->getProduct()),
             'tariff_code'   => $params['tariff_code'] ?? $this->config->getTariffCode($conversion->getProduct()),
             'payment_type'  => $params['payment_type'] ?? self::PAYMENT_TYPE_SALE,
@@ -50,7 +60,7 @@ class SendService implements SendServiceInterface
             $customParams = '&'.http_build_query($params['custom_params']);
         }
 
-        $url = "{$this->getDomain()}/r?{$queryParams}{$customParams}";
+        $url = "{$this->getDomain()}/{$path}?{$queryParams}{$customParams}";
 
         return new Request('get', $url);
     }

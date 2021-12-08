@@ -12,13 +12,18 @@ class SendService implements SendServiceInterface
 {
     use SendServiceTrait;
 
+    public const PATH_POSTBACK = 'postback';
+
+    public const STATUS_APPROVED = 1;
+
     /**
      * @var EnvironmentConfig
      */
-    protected $config;
+    protected EnvironmentConfig $config;
 
     /**
      * SendService constructor.
+     *
      * @param EnvironmentConfig $config
      */
     public function __construct(EnvironmentConfig $config)
@@ -27,18 +32,23 @@ class SendService implements SendServiceInterface
         $this->source = LeadSource::STORM_DIGITAL;
     }
 
+    /**
+     * Prepare and send postback request.
+     *
+     * @param Conversion $conversion
+     * @param array $params
+     * @return Request
+     */
     protected function getRequest(Conversion $conversion, array $params): Request
     {
-        $clickId = $conversion->getConfig()['clickId'] ?? null;
-        $actionId = $conversion->getId();
-        $secure = $this->config->getSecure($conversion->getProduct());
-        $goal = $params['goal'] ?? $this->config->getGoal($conversion->getProduct());
+        $path = $params['path'] ?? self::PATH_POSTBACK;
 
         $queryParams = http_build_query([
-            'clickid'   => $clickId,
-            'action_id' => $actionId,
-            'goal'      => $goal,
-            'secure'    => $secure,
+            'clickid'   => $conversion->getConfig()['clickId'] ?? null,
+            'action_id' => $conversion->getId(),
+            'status'    => $params['status'] ?? self::STATUS_APPROVED,
+            'goal'      => $params['goal'] ?? $this->config->getGoal($conversion->getProduct()),
+            'secure'    => $params['secure'] ?? $this->config->getSecure($conversion->getProduct()),
         ]);
 
         $customParams = '';
@@ -46,7 +56,7 @@ class SendService implements SendServiceInterface
             $customParams = '&'.http_build_query($params['custom_params']);
         }
 
-        $url = "{$this->getDomain()}/postback?{$queryParams}{$customParams}";
+        $url = "{$this->getDomain()}/{$path}?{$queryParams}{$customParams}";
 
         return new Request('get', $url);
     }
