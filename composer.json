@@ -34,7 +34,7 @@
         "irc": "irc://irc.freenode.org/composer"
     },
     "require": {
-        "illuminate/support": "^5.6|^6.0|^7.0|^8.0"
+        "illuminate/support": "^5.6|^6.0|^7.0|^8.0|^9.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.5",
